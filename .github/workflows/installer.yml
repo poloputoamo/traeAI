@@ -33,7 +33,7 @@ jobs:
 
       - name: Create installer
         run: |
-          cmd.exe /c "C:\Program Files (x86)\Inno Setup 6\ISCC.exe setup.iss"
+          cmd.exe /c ""C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss"
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
