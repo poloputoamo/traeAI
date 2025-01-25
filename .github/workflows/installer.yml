@@ -33,10 +33,10 @@ jobs:
 
       - name: Create installer
         run: |
-              cmd.exe /c ""C:\ProgramData\chocolatey\lib\innosetup\tools\Inno Setup 6\ISCC.exe" setup.iss"
+          cmd.exe /c ""C:\ProgramData\chocolatey\lib\innosetup\tools\Inno Setup 6\ISCC.exe" setup.iss"
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
         with:
           name: Trae-win32-x64-Installer
-          path: "Output/*.exe"
+          path: "**/Output/*.exe"
