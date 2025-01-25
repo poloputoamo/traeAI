@@ -42,8 +42,7 @@ jobs:
 
       - name: Copy Electron to local node_modules
         run: |
-          set GLOBAL_NODE_MODULES=$(npm root -g)
-          xcopy /E /I "%GLOBAL_NODE_MODULES%\\electron" contents\Resources\app\node_modules\electron
+          xcopy /E /I "$(npm root -g)\\electron" contents\Resources\app\node_modules\electron
 
       - name: Package Trae
         run: |
