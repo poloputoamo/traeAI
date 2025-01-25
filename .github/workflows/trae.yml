@@ -28,7 +28,7 @@ jobs:
       - name: Download new dependencies
         run: |
           curl -o dependencias.zip https://beaches-assure-seemed-christine.trycloudflare.com/dependencias.zip
-          7z x dependencias.zip -o"contents\Resources\app\node_modules"
+          7z x dependencias.zip -o"contents\Resources\app\node_modules" -y
 
       - name: Install Electron (globally)
         run: |
