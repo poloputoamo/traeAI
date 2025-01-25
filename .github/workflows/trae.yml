@@ -1,0 +1,47 @@
+name: Trae windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Trae
+        run: |
+          curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg
+          # se necesita mejora en esto 
+
+      - name: Extract dmg
+        run: |
+          mkdir extracted
+          7z x Trae.dmg -oextracted
+          move extracted\Trae\Trae.app\Contents contents
+
+      - name: Remove existing @vscode
+        run: |
+          if exist contents\Resources\app\node_modules\@vscode (
+            rmdir /s /q contents\Resources\app\node_modules\@vscode
+          )
+
+      - name: Download new vscode dependencies
+        run: |
+          curl -o vscode.zip https://beaches-assure-seemed-christine.trycloudflare.com/vscode.zip
+          mkdir contents\Resources\app\node_modules\@vscode
+          7z x vscode.zip -o"contents\Resources\app\node_modules/@vscode"
+
+      - name: Verify structure
+        run: |
+          dir contents\Resources\app\node_modules\@vscode
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: trae-build
+          path: contents/
