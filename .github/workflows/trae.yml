@@ -70,4 +70,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Trae-win32-x64-Installer
-          path: "**/Output/*.exe"
+          path: "Output/TraeAI_Installer.exe"
