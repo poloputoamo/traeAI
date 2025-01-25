@@ -64,10 +64,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v3
+      - name: Restore cached build artifact
+        uses: actions/cache@v3
         with:
-          name: Trae-Windows-Executable
+          path: Trae-Windows-Executable.zip
+          key: ${{ runner.os }}-trae-windows-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-trae-windows-build-
 
       - name: Extract the outer zip
         run: |
@@ -79,11 +82,11 @@ jobs:
           mkdir extracted_inner
           7z x extracted/Trae-win32-x64.zip -oextracted_inner
 
-      - name: Download inno setup script
+      - name: Download Inno Setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
 
-      - name: Install inno setup
+      - name: Install Inno Setup
         run: |
           choco install innosetup --yes
 
@@ -94,5 +97,5 @@ jobs:
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Trae-Windows-Installer
+          name: Trae-win32-x64-Installer
           path: "**/*.exe"
