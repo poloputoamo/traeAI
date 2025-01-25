@@ -22,14 +22,12 @@ jobs:
         run: |
           mkdir extracted
           7z x -snl Trae.dmg -oextracted || echo "asd"
-          move extracted\Trae\Trae.app\Contents contentsç
+          move extracted\Trae\Trae.app\Contents contents
         continue-on-error: true
 
       - name: Remove existing @vscode
         run: |
-          if exist contents\Resources\app\node_modules\@vscode (
             rmdir /s /q contents\Resources\app\node_modules\@vscode
-          )
 
       - name: Download new vscode dependencies
         run: |
