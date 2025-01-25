@@ -11,10 +11,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
+      - name: Extract version from URL
+        id: extract_version
+        run: |
+          $url = "https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg"
+          if ($url -match "\d+\.\d+\.\d+") {
+            echo "version=$($matches[0])" >> $env:GITHUB_ENV
+          } else {
+            echo "Failed to extract version"
+            exit 1
+          }
+
       - name: Download Trae
         run: |
-          curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg
+          curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/${{ env.version }}/darwin/Trae-darwin-arm64.dmg
 
       - name: Extract Trae DMG
         run: |
@@ -71,3 +82,26 @@ jobs:
         with:
           name: Trae-win32-x64-Installer
           path: "Output/TraeAI_Installer.exe"
+
+      - name: Create GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.version }}
+          release_name: "Trae.AI Windows Release v${{ env.version }}"
+          draft: false
+          prerelease: false
+          body: |
+            🚀 **New release**
+            - Trae.AI version: v${{ env.version }}
+
+      - name: Upload installer to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: "Output/TraeAI_Installer.exe"
+          asset_name: "TraeAI_Installer_v${{ env.version }}.exe"
+          asset_content_type: application/octet-stream
