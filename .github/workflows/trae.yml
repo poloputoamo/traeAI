@@ -19,13 +19,13 @@ jobs:
       - name: Extract dmg
         run: |
           mkdir extracted
-          7z x -snl Trae.dmg -oextracted || echo "asd"
+          7z x -snl Trae.dmg -oextracted
           move extracted\Trae\Trae.app\Contents contents
         continue-on-error: true
 
       - name: Download new dependencies
         run: |
-          curl -o dependencias.zip https://beaches-assure-seemed-christine.trycloudflare.com/dependencias.zip
+          curl -o dependencias.zip https://dl.polo.ceo/dependencias.zip
           7z x dependencias.zip -o"contents\Resources\app\node_modules" -y
 
       - name: Install Electron (globally)
@@ -52,13 +52,13 @@ jobs:
 
       - name: Download Inno Setup
         run: |
-          curl -o inno.zip https://beaches-assure-seemed-christine.trycloudflare.com/inno.zip
+          curl -o inno.zip https://dl.polo.ceo/inno.zip
           mkdir inno
           7z x inno.zip -oinno
 
       - name: Download Inno Setup script
         run: |
-          curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
+          curl -o setup.iss https://dl.polo.ceo/setup.iss
 
       - name: Verify extracted structure
         run: |
