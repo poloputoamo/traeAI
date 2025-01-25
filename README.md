@@ -1,1 +1,1 @@
-para editar esto
+## Trae.AI on Windows
