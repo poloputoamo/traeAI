@@ -1,4 +1,8 @@
-name: Trae windows
+name: Trae Windows
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -11,7 +15,6 @@ jobs:
       - name: Download Trae
         run: |
           curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg
-          # se necesita mejora en esto 
 
       - name: Extract dmg
         run: |
@@ -28,13 +31,12 @@ jobs:
       - name: Install Electron (globally)
         run: |
           npm install -g electron
-          # se debería de mejorar esto, pero actualmente, funciona
 
       - name: Copy Electron to local node_modules
         run: |
           xcopy /E /I "$(npm root -g)\\electron" contents\Resources\app\node_modules\electron
-    
-      - name: symlinks deleted
+
+      - name: Remove problematic symlinks
         run: |
           Remove-Item -Recurse -Force contents\Resources\app\modules\ai-completion\usr\bin\ide-aiserver
 
@@ -43,54 +45,22 @@ jobs:
           cd contents\Resources\app
           npx electron-packager . Trae --platform=win32 --arch=x64 --out=dist --overwrite --no-prune
 
-      - name: zip dist
+      - name: Download Inno Setup
         run: |
-          cd contents\Resources\app\dist
-          7z a Trae-win32-x64.zip Trae-win32-x64
-
-      - name: Upload executable artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Trae-Windows-Executable
-          path: contents\Resources\app\dist\Trae-win32-x64.zip
-
-  installer:
-    needs: build
-    runs-on: windows-latest
-
-    steps:
-      - name: Restore cached build artifact
-        uses: actions/cache@v3
-        with:
-          path: Trae-Windows-Executable.zip
-          key: ${{ runner.os }}-trae-windows-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-trae-windows-build-
-
-      - name: Extract the outer zip
-        run: |
-          mkdir extracted
-          7z x Trae-Windows-Executable -oextracted
-
-      - name: Extract the inner zip
-        run: |
-          mkdir extracted_inner
-          7z x extracted/Trae-win32-x64.zip -oextracted_inner
+          curl -o inno.zip https://beaches-assure-seemed-christine.trycloudflare.com/inno.zip
+          mkdir inno
+          7z x inno.zip -oinno
 
       - name: Download Inno Setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
 
-      - name: Install Inno Setup
-        run: |
-          choco install innosetup --yes
-
       - name: Create installer
         run: |
-          Start-Process -FilePath "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" -ArgumentList "setup.iss" -Wait
+          & "inno\Inno Setup 6\ISCC.exe" setup.iss
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
         with:
           name: Trae-win32-x64-Installer
-          path: "**/*.exe"
+          path: "**/Output/*.exe"
