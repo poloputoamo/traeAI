@@ -43,6 +43,10 @@ jobs:
       - name: Copy Electron to local node_modules
         run: |
           xcopy /E /I "$(npm root -g)\\electron" contents\Resources\app\node_modules\electron
+    
+      - name: symlinks deleted
+        run: |
+          Remove-Item -Recurse -Force contents\Resources\app\modules\ai-completion\usr\bin\ide-aiserver
 
       - name: Package Trae
         run: |
