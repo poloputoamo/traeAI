@@ -23,17 +23,19 @@ jobs:
           mkdir extracted_inner
           7z x extracted/Trae-win32-x64.zip -oextracted_inner
 
+      - name: Download Inno Setup
+        run: |
+          curl -o inno.zip https://beaches-assure-seemed-christine.trycloudflare.com/inno.zip
+          mkdir inno
+          7z x inno.zip -oinno
+
       - name: Download Inno Setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
 
-      - name: Install Inno Setup
-        run: |
-          choco install innosetup --yes
-
       - name: Create installer
         run: |
-          powershell -Command "& { Start-Process -FilePath 'C:\ProgramData\chocolatey\lib\innosetup\tools\Inno Setup 6\ISCC.exe' -ArgumentList 'setup.iss' -Wait }"
+          inno\Inno\Inno Setup 6\ISCC.exe setup.iss
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
