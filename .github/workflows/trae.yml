@@ -35,12 +35,27 @@ jobs:
           mkdir contents\Resources\app\node_modules\@vscode
           7z x vscode.zip -o"contents\Resources\app\node_modules/@vscode"
 
-      - name: Verify structure
+      - name: Install Electron (globally)
         run: |
-          dir contents\Resources\app\node_modules\@vscode
+          npm install -g electron
+          # se debería de mejorar esto, pero actualmente, funciona
 
-      - name: Upload artifacts
+      - name: Copy Electron to local node_modules
+        run: |
+          xcopy /E /I "%APPDATA%\npm\node_modules\electron" contents\Resources\app\node_modules\electron
+
+      - name: Package Trae
+        run: |
+          cd contents\Resources\app
+          npx electron-packager . Trae --platform=win32 --arch=x64 --out=dist --overwrite --no-prune
+
+      - name: zip dist
+        run: |
+          cd contents\Resources\app\dist
+          7z a Trae-win32-x64.zip Trae-win32-x64
+
+      - name: Upload executable artifact
         uses: actions/upload-artifact@v3
         with:
-          name: trae-build
-          path: contents/
+          name: Trae-Windows-Executable
+          path: contents\Resources\app\dist\Trae-win32-x64.zip
