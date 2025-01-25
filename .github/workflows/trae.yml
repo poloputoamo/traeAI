@@ -69,6 +69,16 @@ jobs:
         with:
           name: Trae-Windows-Executable
 
+      - name: Extract the outer zip
+        run: |
+          mkdir extracted
+          7z x Trae-Windows-Executable.zip -oextracted
+
+      - name: Extract the inner zip
+        run: |
+          mkdir extracted_inner
+          7z x extracted/Trae-win32-x64.zip -oextracted_inner
+
       - name: Download inno setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
@@ -79,10 +89,10 @@ jobs:
 
       - name: Create installer
         run: |
-           Start-Process -FilePath "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" -ArgumentList "setup.iss" -Wait
+          Start-Process -FilePath "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" -ArgumentList "setup.iss" -Wait
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Trae-win32-x64-Installer
+          name: Trae-Windows-Installer
           path: "**/*.exe"
