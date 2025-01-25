@@ -58,3 +58,31 @@ jobs:
         with:
           name: Trae-Windows-Executable
           path: contents\Resources\app\dist\Trae-win32-x64.zip
+
+  installer:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Trae-Windows-Executable
+
+      - name: Download inno setup script
+        run: |
+          curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
+
+      - name: Install inno setup
+        run: |
+          choco install innosetup --yes
+
+      - name: Create installer
+        run: |
+          "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Trae-win32-x64-Installer
+          path: TraeAI_Installer.exe
