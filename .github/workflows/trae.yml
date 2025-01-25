@@ -79,7 +79,7 @@ jobs:
 
       - name: Create installer
         run: |
-           & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
+           Start-Process -FilePath "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" -ArgumentList "setup.iss" -Wait
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
