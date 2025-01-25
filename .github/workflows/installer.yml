@@ -1,8 +1,4 @@
 name: installer
-on:
-  push:
-    branches:
-      - main
 
 jobs:
   installer:
