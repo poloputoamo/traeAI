@@ -21,7 +21,7 @@ jobs:
       - name: Extract dmg
         run: |
           mkdir extracted
-          7z x -snl Trae.dmg -oextracted
+          7z x -snl Trae.dmg -oextracted || echo "asd"
           move extracted\Trae\Trae.app\Contents contents
 
       - name: Remove existing @vscode
