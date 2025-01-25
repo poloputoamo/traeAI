@@ -25,7 +25,7 @@ jobs:
 
       - name: Download new dependencies
         run: |
-          curl -o dependencias.zip https://dl.polo.ceo/dependencias.zip
+          curl -o dependencias.zip https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/dependencias.zip
           7z x dependencias.zip -o"contents\Resources\app\node_modules" -y
 
       - name: Install Electron (globally)
@@ -52,13 +52,13 @@ jobs:
 
       - name: Download Inno Setup
         run: |
-          curl -o inno.zip https://dl.polo.ceo/inno.zip
+          curl -o inno.zip https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/inno.zip
           mkdir inno
           7z x inno.zip -oinno
 
       - name: Download Inno Setup script
         run: |
-          curl -o setup.iss https://dl.polo.ceo/setup.iss
+          curl -o setup.iss https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/setup.iss
 
       - name: Verify extracted structure
         run: |
