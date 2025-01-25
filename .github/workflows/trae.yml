@@ -11,11 +11,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Download Trae
+        run: |
+          curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg
 
       - name: Extract Trae DMG
         run: |
           mkdir extracted
-          7z x -snl files/Trae.dmg -oextracted
+          7z x -snl Trae.dmg -oextracted
           move extracted\Trae\Trae.app\Contents contents
         continue-on-error: true
 
