@@ -22,7 +22,8 @@ jobs:
         run: |
           mkdir extracted
           7z x -snl Trae.dmg -oextracted || echo "asd"
-          move extracted\Trae\Trae.app\Contents contents
+          move extracted\Trae\Trae.app\Contents contentsç
+        continue-on-error: true
 
       - name: Remove existing @vscode
         run: |
