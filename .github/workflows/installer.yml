@@ -33,7 +33,12 @@ jobs:
 
       - name: Create installer
         run: |
-          Start-Process -FilePath "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" -ArgumentList "setup.iss" -Wait
+          if not exist "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" (
+          echo "not here"
+          exit 1
+          ) else (
+          echo "yes"
+          )
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
