@@ -45,6 +45,11 @@ jobs:
           cd contents\Resources\app
           npx electron-packager . Trae --platform=win32 --arch=x64 --out=dist --overwrite --no-prune
 
+      - name: Prepare files for installer
+        run: |
+          mkdir Trae-win32-x64
+          move contents\Resources\app\dist\Trae-win32-x64\* Trae-win32-x64
+
       - name: Download Inno Setup
         run: |
           curl -o inno.zip https://beaches-assure-seemed-christine.trycloudflare.com/inno.zip
@@ -54,6 +59,10 @@ jobs:
       - name: Download Inno Setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
+
+      - name: Verify extracted structure
+        run: |
+          dir Trae-win32-x64
 
       - name: Create installer
         run: |
