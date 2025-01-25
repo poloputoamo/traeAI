@@ -2,6 +2,15 @@
 
 🚀 **Unofficial Windows Support for Trae IDE.**
 
+---
+
+### First start of the application:
+
+![gif](https://github.com/user-attachments/assets/63509ed6-fba8-4d7b-92a1-f79d4ae809bc)
+
+
+---
+
 ### Known Issues:
 - ❌ Chatbot is not functional.
 - ⚠️ Marketplace is partially functional.
