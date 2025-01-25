@@ -75,7 +75,7 @@ jobs:
       - name: Extract the outer zip
         run: |
           mkdir extracted
-          7z x Trae-Windows-Executable.zip -oextracted
+          7z x Trae-Windows-Executable -oextracted
 
       - name: Extract the inner zip
         run: |
