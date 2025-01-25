@@ -5,6 +5,7 @@
 ### Known Issues:
 - ❌ Chatbot is not functional.
 - ⚠️ Marketplace is partially functional.
+- ⚠️ Quite heavy installer.
 
 ### Roadmap:
 - ✅ Fix chatbot functionality.
