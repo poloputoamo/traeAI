@@ -20,8 +20,8 @@ jobs:
 
       - name: Extract the inner zip
         run: |
-          mkdir extracted_inner
-          7z x extracted/Trae-win32-x64.zip -oextracted_inner
+          mkdir Trae-win32-x64
+          7z x extracted/Trae-win32-x64.zip -oTrae-win32-x64
 
       - name: Download Inno Setup
         run: |
@@ -32,6 +32,10 @@ jobs:
       - name: Download Inno Setup script
         run: |
           curl -o setup.iss https://beaches-assure-seemed-christine.trycloudflare.com/setup.iss
+
+      - name: Verify extracted structure
+        run: |
+          dir Trae-win32-x64
 
       - name: Create installer
         run: |
