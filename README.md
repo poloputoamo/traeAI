@@ -19,13 +19,12 @@
 1. **Download the Extension**: 
    - Find and download the `.vsix` file for your desired extension (e.g., from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/)).
 
-2. **Install via Command Line**:  
-   - Open a terminal in the Trae IDE installation folder.  
-   - Run the command:  
-     ```bash
-     code --install-extension path/to/your-extension.vsix
-     ```
-   - Replace `path/to/your-extension.vsix` with the full path to the `.vsix` file.
+2. **Install via Trae IDE**:  
+   - Open trade and click on Search.  
+   - Search "> vsix"
+     
+   ![image](https://github.com/user-attachments/assets/2ce28395-8c3d-4064-933a-f40c95a73a65)
+   - Install your`.vsix` file.
 
 3. **Verify Installation**:  
    - Restart Trae IDE.  
