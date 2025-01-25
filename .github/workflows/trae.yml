@@ -12,21 +12,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download Trae
-        run: |
-          curl -o Trae.dmg https://lf-cdn.trae.ai/obj/trae-ai-us/pkg/app/releases/stable/1.0.5760/darwin/Trae-darwin-arm64.dmg
-
-      - name: Extract dmg
+      - name: Extract Trae DMG
         run: |
           mkdir extracted
-          7z x -snl Trae.dmg -oextracted
+          7z x -snl files/Trae.dmg -oextracted
           move extracted\Trae\Trae.app\Contents contents
         continue-on-error: true
 
-      - name: Download new dependencies
+      - name: Extract dependencies
         run: |
-          curl -o dependencias.zip https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/dependencias.zip
-          7z x dependencias.zip -o"contents\Resources\app\node_modules" -y
+          7z x files/dependencias.zip -o"contents\Resources\app\node_modules" -y
 
       - name: Install Electron (globally)
         run: |
@@ -34,7 +29,7 @@ jobs:
 
       - name: Copy Electron to local node_modules
         run: |
-          xcopy /E /I "$(npm root -g)\\electron" contents\Resources\app\node_modules\electron
+          xcopy /E /I "$(npm root -g)\electron" contents\Resources\app\node_modules\electron
 
       - name: Remove problematic symlinks
         run: |
@@ -50,15 +45,14 @@ jobs:
           mkdir Trae-win32-x64
           move contents\Resources\app\dist\Trae-win32-x64\* Trae-win32-x64
 
-      - name: Download Inno Setup
+      - name: Extract Inno Setup
         run: |
-          curl -o inno.zip https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/inno.zip
           mkdir inno
-          7z x inno.zip -oinno
+          7z x files/inno.zip -oinno
 
-      - name: Download Inno Setup script
+      - name: Use Inno Setup script
         run: |
-          curl -o setup.iss https://github.com/polo-1245-oficial/traeAI/raw/refs/heads/main/files/setup.iss
+          copy files/setup.iss setup.iss
 
       - name: Verify extracted structure
         run: |
