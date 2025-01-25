@@ -27,7 +27,7 @@ jobs:
 
       - name: Remove existing @vscode
         run: |
-            rmdir /s /q contents\Resources\app\node_modules\@vscode
+            Remove-Item -Recurse -Force contents\Resources\app\node_modules\@vscode
 
       - name: Download new vscode dependencies
         run: |
