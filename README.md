@@ -20,9 +20,9 @@
 - ⚠️ Quite heavy installer.
 
 ### Roadmap:
-- ✅ Fix chatbot functionality.
-- ✅ Full marketplace support.
-- ✅ Add Linux compatibility.
+- ❌ Fix chatbot functionality.
+- ❌ Full marketplace support.
+- ❌ Add Linux compatibility.
 
 ---
 
