@@ -4,6 +4,8 @@
 
 [Download from releases](https://github.com/polo-1245-oficial/traeAI/releases/tag/v1.0.5760)
 
+![downloadcount](https://img.shields.io/github/downloads/polo-1245-oficial/traeAI/latest/total)
+
 
 ---
 
