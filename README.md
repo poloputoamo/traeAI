@@ -1,3 +1,10 @@
+the wait is over
+[official download of trae on windows](https://www.trae.ai/download)
+
+
+------
+
+
 ## Trae.AI on Windows
 
 🚀 **Unofficial Windows Support for Trae IDE.**
